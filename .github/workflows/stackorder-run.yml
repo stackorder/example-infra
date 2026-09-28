@@ -6,7 +6,7 @@ on:
       mode: { description: "plan, apply or drift", type: string, required: true }
       wave: { description: Wave number within the run, type: string, required: false }
       sha: { description: Commit to check out, type: string, required: true }
-      stacks: { description: "JSON array of matrix entries, each carrying its environment", type: string, required: false }
+      stacks: { description: "JSON array of matrix entries, each carrying its environment", type: string, required: true }
 jobs:
   run:
     uses: stackorder/actions/.github/workflows/run.yml@v1
