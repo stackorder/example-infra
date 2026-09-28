@@ -14,12 +14,12 @@ stackorder.yaml                 repository policy: discovery, environments, appl
 .github/workflows/
   stackorder-plan.yml           PR plans through stackorder/actions plan.yml
   stackorder-run.yml            server-dispatched plan, apply and drift through run.yml
-  validate.yml                  fmt check and validate for Terraform and OpenTofu
+  validate.yml                  fmt check, validate and test for Terraform and OpenTofu
 .stackorder/hooks/post-plan.sh  example hook: resource count from the plan JSON
 modules/
   common/                       tagging helper (locals and outputs only)
-  vpc/                          fake VPC and three subnets
-  eks/                          fake cluster; tags through ../common
+  vpc/                          fake VPC and three subnets; tests/ pins the ids the stacks rely on
+  eks/                          fake cluster; tags through ../common; tests/ checks tags and inputs
 stacks/
   prod/vpc/                     modules/vpc, state prod/vpc.tfstate
   prod/eks/                     modules/eks, depends_on stacks/prod/vpc
@@ -27,7 +27,7 @@ stacks/
   staging/vpc/                  modules/vpc, state staging/vpc.tfstate
   staging/apps/                 depends_on stacks/staging/vpc, plan_output: summary
   legacy/dns/                   reads prod/vpc.tfstate, edge suppressed with ignore_inferred
-Makefile                        fmt, validate, graph
+Makefile                        fmt, validate, test, graph
 ```
 
 Every stack has an S3 backend in bucket `stackorder-example-state`, region `us-east-1`, with `use_lockfile = true` (S3-native locking, which is why stacks require Terraform or OpenTofu 1.10 or later). The state key is the stack path without the `stacks/` prefix, for example `prod/vpc.tfstate`.
@@ -165,7 +165,11 @@ To check the configuration itself:
 make fmt                # terraform fmt -recursive
 make validate           # init -backend=false and validate in every stack and module
 make validate TF=tofu   # the same with OpenTofu
+make test               # terraform test in every module that has tests
+make test TF=tofu       # the same with OpenTofu
 ```
+
+The module tests use `command = plan` only, so they need no backend and no network. A change under `modules/vpc/tests/` is a change under `modules/vpc`, so a pull request that edits it plans the same stacks as the first scenario above.
 
 ## Hooks
 

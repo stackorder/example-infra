@@ -39,3 +39,5 @@ jobs:
           tofu_wrapper: false
       - name: Validate every stack and module without a backend
         run: make validate TF=${{ matrix.tool }}
+      - name: Run the terraform test suites of every module that has one
+        run: make test TF=${{ matrix.tool }}
