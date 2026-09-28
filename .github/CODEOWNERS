@@ -1,0 +1,3 @@
+stacks/prod/**     @stackorder/platform-prod
+stacks/staging/**  @stackorder/platform-eng
+modules/**         @stackorder/platform-eng
