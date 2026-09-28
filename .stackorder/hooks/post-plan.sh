@@ -18,8 +18,6 @@ elif ! command -v jq >/dev/null 2>&1; then
   echo "post-plan: ${stack}: jq is not installed; skipping the resource count"
 elif [[ -f "$plan_json" ]]; then
   count "$plan_json"
-elif [[ "$plan_json" == "{"* ]]; then
-  count <<<"$plan_json"
 else
   echo "post-plan: ${stack}: ${plan_json} is not a file; nothing to count"
 fi
