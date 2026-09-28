@@ -188,7 +188,7 @@ It needs `jq` and prints a notice instead when `jq` is missing. Replace it with 
 | Variable | Used by | Value |
 | --- | --- | --- |
 | `STACKORDER_SERVER_URL` | plan, run | Base URL of the Stackorder server, for example `https://stackorder.example.com` |
-| `STACKORDER_PLAN_ROLE_ARN` | plan | Read-only IAM role for plans, trusted for this repository's `pull_request` tokens |
+| `STACKORDER_PLAN_ROLE_ARN` | plan, run | Read-only IAM role for plans and drift checks, trusted for this repository's `pull_request` tokens and for `environment:default` (server-dispatched plan and drift jobs) |
 | `STACKORDER_APPLY_ROLE_ARN_PROD` | run | Apply role for `stacks/prod/`, trust policy pinned to environment `production` |
 | `STACKORDER_APPLY_ROLE_ARN_STAGING` | run | Apply role for `stacks/staging/`, trust policy pinned to environment `staging` |
 | `STACKORDER_APPLY_ROLE_ARN_DEFAULT` | run | Apply role for `stacks/legacy/`, trust policy pinned to environment `default` |

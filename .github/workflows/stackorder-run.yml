@@ -22,5 +22,6 @@ jobs:
       wave: ${{ inputs.wave }}
       sha: ${{ inputs.sha }}
       stacks: ${{ inputs.stacks }}
+      aws-plan-role-arn: ${{ vars.STACKORDER_PLAN_ROLE_ARN }}
       aws-role-arn-map: '{"stacks/prod/": "${{ vars.STACKORDER_APPLY_ROLE_ARN_PROD }}", "stacks/staging/": "${{ vars.STACKORDER_APPLY_ROLE_ARN_STAGING }}", "stacks/legacy/": "${{ vars.STACKORDER_APPLY_ROLE_ARN_DEFAULT }}"}'
     secrets: inherit
