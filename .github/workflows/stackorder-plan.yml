@@ -1,0 +1,20 @@
+name: stackorder plan
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+concurrency:
+  group: stackorder-plan-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  plan:
+    uses: stackorder/actions/.github/workflows/plan.yml@v1
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
+      checks: write
+    with:
+      server-url: ${{ vars.STACKORDER_SERVER_URL }}
+      aws-role-arn: ${{ vars.STACKORDER_PLAN_ROLE_ARN }}
+      tool: terraform
+    secrets: inherit

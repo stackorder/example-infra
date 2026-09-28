@@ -1,0 +1,26 @@
+name: stackorder run
+on:
+  workflow_dispatch:
+    inputs:
+      run_id: { description: Stackorder run id, type: string, required: true }
+      mode: { description: "plan, apply or drift", type: string, required: true }
+      wave: { description: Wave number within the run, type: string, required: false }
+      sha: { description: Commit to check out, type: string, required: true }
+      stacks: { description: "JSON array of matrix entries, each carrying its environment", type: string, required: false }
+jobs:
+  run:
+    uses: stackorder/actions/.github/workflows/run.yml@v1
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
+      checks: write
+    with:
+      server-url: ${{ vars.STACKORDER_SERVER_URL }}
+      run-id: ${{ inputs.run_id }}
+      mode: ${{ inputs.mode }}
+      wave: ${{ inputs.wave }}
+      sha: ${{ inputs.sha }}
+      stacks: ${{ inputs.stacks }}
+      aws-role-arn-map: '{"stacks/prod/": "${{ vars.STACKORDER_APPLY_ROLE_ARN_PROD }}", "stacks/staging/": "${{ vars.STACKORDER_APPLY_ROLE_ARN_STAGING }}", "stacks/legacy/": "${{ vars.STACKORDER_APPLY_ROLE_ARN_DEFAULT }}"}'
+    secrets: inherit
