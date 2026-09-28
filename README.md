@@ -4,7 +4,7 @@ A small Terraform monorepo wired for [Stackorder](https://github.com/stackorder/
 
 It serves two purposes. The Stackorder end-to-end tests run the real CLI, server and Terraform against it, and it is the example to read when you want to see how a repository is wired for Stackorder.
 
-Nothing here creates cloud resources. Every resource is a `terraform_data`, and no configuration requires a provider, so `init` downloads nothing and the only network traffic is to the S3 state bucket. VPC, subnet and cluster ids are fake values derived from names, so they are the same on every apply.
+Nothing here creates cloud resources. Every resource is a `terraform_data`, and no configuration requires a provider, so `init` downloads nothing and the only network traffic is to the S3 state bucket and to STS, which the S3 backend and `terraform_remote_state` call to validate credentials. VPC, subnet and cluster ids are fake values derived from names, so they are the same on every apply.
 
 ## Layout
 
