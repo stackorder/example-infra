@@ -13,6 +13,7 @@ jobs:
       contents: read
       actions: read
       checks: write
+      pull-requests: read
     with:
       server-url: ${{ vars.STACKORDER_SERVER_URL }}
       aws-role-arn: ${{ vars.STACKORDER_PLAN_ROLE_ARN }}
