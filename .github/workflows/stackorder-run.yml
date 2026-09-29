@@ -1,4 +1,5 @@
 name: stackorder run
+run-name: stackorder ${{ inputs.mode }} ${{ inputs.run_id }} wave ${{ inputs.wave }}
 on:
   workflow_dispatch:
     inputs:
