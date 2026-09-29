@@ -6,6 +6,20 @@ It serves two purposes. The Stackorder end-to-end tests run the real CLI, server
 
 Nothing here creates cloud resources. Every resource is a `terraform_data`, and no configuration requires a provider, so `init` downloads nothing and the only network traffic is to the S3 state bucket and to STS, which the S3 backend and `terraform_remote_state` call to validate credentials. VPC, subnet and cluster ids are fake values derived from names, so they are the same on every apply.
 
+## Tested versions
+
+This repository was tested with:
+
+| Component | Version |
+| --- | --- |
+| [`stackorder/stackorder`](https://github.com/stackorder/stackorder) (server and CLI) | v0.1.0 |
+| [`stackorder/actions`](https://github.com/stackorder/actions) (`plan.yml`, `run.yml`) | v1.0.0, called as `@v1` |
+| Terraform | 1.14.4 |
+| OpenTofu | 1.12.6 |
+| LocalStack (S3 and STS, for the end-to-end tests) | 4.0 |
+
+The stacks need Terraform or OpenTofu 1.10 or later for `use_lockfile`. `validate.yml` pins the same Terraform and OpenTofu versions, and the Stackorder end-to-end suite runs against this repository with both tools.
+
 ## Layout
 
 ```text
