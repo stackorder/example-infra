@@ -189,7 +189,7 @@ The configuration keys it exercises:
 - `depends_on: ["infra/kyc:production"]` names one instance of another directory.
 - The GitHub environment of an instance is its own name unless something maps it elsewhere; `environments` has no `infra/` key, so the instance names apply as they are.
 
-`role` is `ephemeral`. Terraform freezes the values of ordinary variables in a saved plan, but asks for ephemeral ones again when it applies that plan, so the apply runs with `TF_VAR_role=deploy` although the plan was made with `plan`. Its validation accepts only those two values, and the `terraform_data` references it in a precondition so that the validation runs before anything is created. A real stack would pass the variable to a provider's `assume_role` to choose a read-only or a deploy role.
+`role` is `ephemeral`. Terraform freezes the values of ordinary variables in a saved plan, but asks for ephemeral ones again when it applies that plan, so the apply runs with `TF_VAR_role=deploy` although the plan was made with `plan`. Its validation accepts only those two values, and a precondition on the `terraform_data` requires `deploy` while `terraform.applying` is true, so an apply that got the plan value fails before anything is created. A real stack would pass the variable to a provider's `assume_role` to choose a read-only or a deploy role.
 
 `infra/registry` validates that `environment` is `shared`, so its plan fails if `TF_VAR_environment` renders anything other than its instance name.
 
