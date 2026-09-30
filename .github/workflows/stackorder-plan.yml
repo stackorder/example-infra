@@ -18,4 +18,3 @@ jobs:
       server-url: ${{ vars.STACKORDER_SERVER_URL }}
       aws-role-arn: ${{ vars.STACKORDER_PLAN_ROLE_ARN }}
       tool: terraform
-    secrets: inherit
