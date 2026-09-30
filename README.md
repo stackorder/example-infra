@@ -42,6 +42,7 @@ The stacks need Terraform or OpenTofu 1.10 or later for `use_lockfile`, and the 
 ```text
 stackorder.yaml                 repository policy: discovery, environments, apply gate, drift
 .github/CODEOWNERS              owning teams per path
+.github/assets/                 README logos and the repository social preview image
 .github/workflows/
   stackorder-plan.yml           PR plans through stackorder/actions plan.yml
   stackorder-run.yml            server-dispatched plan, apply and drift through run.yml
