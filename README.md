@@ -13,12 +13,12 @@ This repository was tested with:
 | Component | Version |
 | --- | --- |
 | [`stackorder/stackorder`](https://github.com/stackorder/stackorder) (server and CLI) | v0.1.0 |
-| [`stackorder/actions`](https://github.com/stackorder/actions) (`plan.yml`, `run.yml`) | v1.0.0, called as `@v1` |
+| [`stackorder/actions`](https://github.com/stackorder/actions) (`plan.yml`, `run.yml`) | v1.1.0, called as `@v1` |
 | Terraform | 1.14.4 |
 | OpenTofu | 1.12.6 |
 | LocalStack (S3 and STS, for the end-to-end tests) | 4.0 |
 
-The stacks need Terraform or OpenTofu 1.10 or later for `use_lockfile`, and the `infra/` stacks need Terraform 1.10 or OpenTofu 1.11 or later for their `ephemeral` variable. The `infra/` stacks and the `stacks.instances` and `env` keys in `stackorder.yaml` also need a Stackorder server and CLI with stack instances, which is newer than v0.1.0; v0.1.0 rejects those keys as unknown. `validate.yml` pins the same Terraform and OpenTofu versions, and the Stackorder end-to-end suite runs against this repository with both tools.
+The stacks need Terraform or OpenTofu 1.10 or later for `use_lockfile`, and the `infra/` stacks need Terraform 1.10 or OpenTofu 1.11 or later for their `ephemeral` variable. The `infra/` stacks and the `stacks.instances` and `env` keys in `stackorder.yaml` also need a Stackorder server and CLI with stack instances, which is newer than v0.1.0; v0.1.0 rejects those keys as unknown. The `:instance` keys in `stackorder-run.yml`'s `aws-role-arn-map` need `stackorder/actions` v1.1.0 or later; with v1.0.0 the `infra/` instances match no key and their applies run without AWS credentials. `validate.yml` pins the same Terraform and OpenTofu versions, and the Stackorder end-to-end suite runs against this repository with both tools.
 
 ## Layout
 
@@ -245,7 +245,7 @@ The module tests use `command = plan` only, so they need no backend and no netwo
 
 ## Hooks
 
-The CLI runs `.stackorder/hooks/post-plan.sh` after each plan, in CI and locally, with `STACKORDER_STACK`, `STACKORDER_RUN_ID`, `STACKORDER_PLAN_JSON` and `STACKORDER_PLAN_FILE` set. The example prints one line per stack:
+The CLI runs `.stackorder/hooks/post-plan.sh` after each plan, in CI and locally, with `STACKORDER_STACK` (the stack key, for example `infra/kyc:production`), `STACKORDER_STACK_PATH` (the stack directory), `STACKORDER_INSTANCE` (the instance name, empty for the `stacks/` stacks), `STACKORDER_RUN_ID`, `STACKORDER_PLAN_JSON` and `STACKORDER_PLAN_FILE` set, plus the stack's `env` for the mode, such as `TF_VAR_environment` and `TF_VAR_role`. The example prints one line per stack:
 
 ```text
 post-plan: stacks/prod/vpc: 4 resources in plan, 0 with changes
