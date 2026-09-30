@@ -23,10 +23,9 @@ resource "terraform_data" "kyc" {
   }
 
   lifecycle {
-    # Referencing var.role makes its validation run before this resource is created on apply.
     precondition {
-      condition     = contains(["plan", "deploy"], var.role)
-      error_message = "role must be plan or deploy."
+      condition     = !terraform.applying || var.role == "deploy"
+      error_message = "role must be deploy while applying."
     }
   }
 }
