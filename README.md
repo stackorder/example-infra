@@ -1,3 +1,20 @@
+<p align="center">
+  <a href="https://stackorder.io">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset=".github/assets/lockup-dark.svg">
+      <img alt="stackorder" src=".github/assets/lockup-light.svg" height="45">
+    </picture>
+  </a>
+</p>
+
+<p align="center">Lightweight Terraform and OpenTofu orchestration on GitHub Actions.</p>
+
+<p align="center">
+  <a href="https://stackorder.io">Website</a> ·
+  <a href="https://docs.stackorder.io">Documentation</a> ·
+  <a href="https://github.com/stackorder/stackorder">stackorder/stackorder</a>
+</p>
+
 # Stackorder example infrastructure
 
 A small Terraform monorepo wired for [Stackorder](https://github.com/stackorder/stackorder). Its dependency graph has two local modules consumed by stacks, a module that calls another module, explicit `depends_on` edges, an inferred `terraform_remote_state` edge, a suppressed one, a stack that falls back to the `default` environment, and a directory deployed once per environment as [stack instances](#stack-instances).
