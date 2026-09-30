@@ -29,7 +29,7 @@ This repository was tested with:
 
 | Component | Version |
 | --- | --- |
-| [`stackorder/stackorder`](https://github.com/stackorder/stackorder) (server and CLI) | v0.1.0 |
+| [`stackorder/stackorder`](https://github.com/stackorder/stackorder) (server and CLI) | v0.2.0 |
 | [`stackorder/actions`](https://github.com/stackorder/actions) (`plan.yml`, `run.yml`) | v1.0.0, called as `@v1` |
 | Terraform | 1.14.4 |
 | OpenTofu | 1.12.6 |
