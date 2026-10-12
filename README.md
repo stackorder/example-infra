@@ -33,10 +33,11 @@ This repository was tested with:
 | --- | --- |
 | [`stackorder/stackorder`](https://github.com/stackorder/stackorder) (server and CLI) | v0.4.0 |
 | [`stackorder/terraform-provider-stackorder`](https://github.com/stackorder/terraform-provider-stackorder) (provider `stackorder/stackorder` on the Terraform and OpenTofu registries) | v0.1.0 |
-| [`stackorder/actions`](https://github.com/stackorder/actions) (`plan.yml`, `run.yml`) | v1.0.0, called as `@v1` |
 | Terraform | 1.14.4 |
 | OpenTofu | 1.12.6 |
 | LocalStack (S3 and STS, for the end-to-end tests) | 4.0 |
+
+`stackorder-plan.yml` and `stackorder-run.yml` call `plan.yml` and `run.yml` of [`stackorder/actions`](https://github.com/stackorder/actions) at `@v1`. No test runs those workflows against this repository, so the table lists no version of them.
 
 The stacks need Terraform or OpenTofu 1.10 or later for `use_lockfile`, and the `infra/` stacks need Terraform 1.10 or OpenTofu 1.11 or later for their `ephemeral` variable. `validate.yml` pins the same Terraform and OpenTofu versions, and the Stackorder end-to-end suite runs against this repository with both tools. No `.terraform.lock.hcl` is committed, because Terraform records the provider under `registry.terraform.io` and OpenTofu under `registry.opentofu.org`, and each tool drops the other's entry when it initialises, so one lock file cannot serve both.
 
