@@ -264,7 +264,7 @@ make test               # terraform test in every module that has tests
 make test TF=tofu       # the same with OpenTofu
 ```
 
-`make validate` downloads `stackorder/stackorder` for `stacks/prod/eks`, from the Terraform Registry or the OpenTofu Registry depending on the tool, and needs no server. A plan of `stacks/prod/eks` outside a Stackorder job needs the server URL in `STACKORDER_SERVER_URL` and an API key in `STACKORDER_API_KEY`. The module tests use `command = plan` only, so they need no backend and no network. A change under `modules/vpc/tests/` is a change under `modules/vpc`, so a pull request that edits it plans the same stacks as the first scenario above.
+`make validate` downloads `stackorder/stackorder` for `stacks/prod/eks`, from the Terraform Registry or the OpenTofu Registry depending on the tool, and needs no server. A plan of `stacks/prod/eks` outside a Stackorder job needs the server URL in `STACKORDER_SERVER_URL`, an API key in `STACKORDER_API_KEY` and the repository as `owner/repo` in `STACKORDER_REPOSITORY`. The module tests use `command = plan` only, so they need no backend and no network. A change under `modules/vpc/tests/` is a change under `modules/vpc`, so a pull request that edits it plans the same stacks as the first scenario above.
 
 ## Hooks
 
