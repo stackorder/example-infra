@@ -10,6 +10,7 @@ on:
       stacks: { description: "JSON array of matrix entries, each carrying its environment", type: string, required: true }
 jobs:
   run:
+    if: github.repository != 'stackorder/example-infra'
     uses: stackorder/actions/.github/workflows/run.yml@v1
     permissions:
       id-token: write
