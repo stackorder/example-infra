@@ -7,6 +7,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   plan:
+    if: github.repository != 'stackorder/example-infra'
     uses: stackorder/actions/.github/workflows/plan.yml@v1
     permissions:
       id-token: write
